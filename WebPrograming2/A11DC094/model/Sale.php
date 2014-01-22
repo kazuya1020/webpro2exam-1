@@ -10,7 +10,10 @@ class Sale{
 
 	//Setter Getter
 	//method
-	public function __Sale(){
+	public function __construct($arg_id=0,$arg_quant=0){
+		$this->id=$arg_id;
+		$this->quantity=$arg_quant;
+		$this->sales_at=date('Y-m-d H:s');
 	}
 	public function all(){
 		$result;
@@ -22,16 +25,16 @@ class Sale{
 		}
 		return $result;
 	}
-	public function save($product_id,$quantity){
+	public function save(){
 		echo "Sale save";
+		echo "item Is".$this->id." ".$this->quantity." ".$this->sales_at."<br>";
 		$this->pdo=new PDO('mysql:host=localhost;dbname=webpro2examdb;charset=utf8','root','');
 		try{
 			$stmt= $this->pdo->prepare('INSERT INTO sales (product_id,sales_at,quantity) VALUES (:p_id,:time,:quant)');
-			$stmt->bindValue(':p_id',$product_id);
-			$stmt->bindValue(':time',date('Y-m-d H:s'));
-			$stmt->bindValue(':quant',$quantity);
+			$stmt->bindValue(':p_id',$this->id);
+			$stmt->bindValue(':time',$this->sales_at);
+			$stmt->bindValue(':quant',$this->quantity);
 			$stmt->execute();
-			echo date('Y-m-d H:s');
 		}catch(PDOexception $e){
 		var_dump($e->getMessage());
 		}
