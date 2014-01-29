@@ -26,10 +26,12 @@ class Product{
 		$result;
 		$this->pdo=new PDO('mysql:host=localhost;dbname=webpro2examdb;charset=utf8','root','');
 		try{
-			$result=$this->pdo->query("SELECT * from products where id=".$id."");
+			$stmt=$this->pdo->prepare("SELECT * from products where id=:id");
+			$stmt->bindValue(':id',$id);
+			$stmt->execute();
 		}catch(PDOexception $e){
 		var_dump($e->getMessage());
 		}
-		return $result;
+		return $stmt;
 	}
 }

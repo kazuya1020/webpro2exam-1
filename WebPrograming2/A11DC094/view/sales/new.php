@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <body>
-	<h1>NEW.PHP</h1>
+	<!-- <h1>NEW.PHP</h1> -->
 	<?php
-	$result=$item->load($_GET['id']);
-	$row=$result->fetch(PDO::FETCH_ASSOC);
 	echo $row['name']." ".$row['price']."<br>";
 	?>
 	<form action="/webPrograming2/A11DC094/Sales/Create" method="post">

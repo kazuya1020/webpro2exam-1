@@ -21,6 +21,8 @@ class SalesController{
 	public function newAction(){
 		//echo "SalesController newAction";
 		$item=new Product();
+		$list=$item->load($_GET['id']);
+		$row=$list->fetch(PDO::FETCH_ASSOC);
 		include('view/sales/new.php');
 	}
 	public function createAction(){
